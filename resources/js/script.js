@@ -82,3 +82,27 @@ $(document).ready(function() {
         }        
     });
 });
+
+// initial viewport width
+let previousViewportWidth = $(window).width();
+
+window.onresize = function(event) {
+    
+    // this viewport width (at the moment of resize)
+    let viewportwidth = $(window).width();
+    var nav = $('.js--main-nav');
+    var icon = $('.js--nav-icon i');
+    
+    // force nav to appear if in web mode
+    if (viewportwidth>764) {
+        nav.css({display: 'block'})
+    } else if (previousViewportWidth > 764) { // if previous website state was in web and we're changing to mobile mode
+        nav.slideToggle(0); // close nav tray
+        
+        // force icon into hamburger (aka navicon-round)
+        icon.addClass('ion-navicon-round')
+        icon.removeClass('ion-close-round');
+    }     
+    // update previousViewportWidth variable
+    previousViewportWidth = $(window).width();
+}
